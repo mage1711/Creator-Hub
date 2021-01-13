@@ -27,7 +27,7 @@ public class Database {
 
         catch (Exception e){
             System.out.println("Cannot connect:" + e);
-           
+
         }
     }
 }
