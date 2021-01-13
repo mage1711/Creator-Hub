@@ -1,4 +1,6 @@
-package main;
+package Main;
+
+import Controllers.Database;
 
 public class CreatorHub {
     public static void main(String[] args) {

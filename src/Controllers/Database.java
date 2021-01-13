@@ -1,4 +1,4 @@
-package main;
+package Controllers;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
