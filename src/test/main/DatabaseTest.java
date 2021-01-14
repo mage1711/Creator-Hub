@@ -1,4 +1,4 @@
-package test.main;
+package main;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
