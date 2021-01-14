@@ -57,7 +57,7 @@ public class Database {
         return results;
     }
 
-    public ArrayList<Object> getDocument(String collectionName, String filterFieldName, Object filterFieldValue, Type classType) {
+    public Object getDocument(String collectionName, String filterFieldName, Object filterFieldValue, Type classType) {
         MongoCollection<Document> collection = getCollection(collectionName);
         Document document = collection.find(Filters.eq(filterFieldName, filterFieldValue)).first();
         if (document != null) {
@@ -83,6 +83,10 @@ public class Database {
         Document document = Document.parse(gson.toJson(object));
         collection.replaceOne(Filters.eq(filterFieldName, filterFieldValue), document);
     }
+
+    // TODO: Add support for single field update to avoid overwrites
+
+    // TODO: Add get all with condition
 
 }
 

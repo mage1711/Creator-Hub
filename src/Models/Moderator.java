@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class Moderator {
@@ -37,19 +39,46 @@ public class Moderator {
         this.email = email;
     }
 
-    public void acceptCreator(User user) {}
-
-    public ArrayList<Report> getReports() {
-        return new ArrayList<>();
+    public void acceptCreator(User user) {
+        Creator creator = (Creator) user;
+        Database database = new Database();
+        database.updateObject("Users", creator, "id", creator.getId());
     }
 
-    public void deletePost(Post post) {}
+    public ArrayList<Report> getReports() {
+        Database database = new Database();
+        ArrayList<Report> reports = new ArrayList<>();
+        ArrayList<Object> reportsDocs = database.getAllDocuments("Reports", Report.class);
+        for (Object reportsDoc : reportsDocs) {
+            reports.add((Report) reportsDoc);
+        }
+        return reports;
+    }
 
-    public void banUser(User user) {}
+    public void deletePost(Post post) {
+        Database database = new Database();
+        database.deleteObject("Posts", post, "id", post.getId());
+    }
 
-    public void warnUser(User user) {}
+    public void banUser(User user) {
+        user.setBanned(true);
+        Database database = new Database();
+        database.updateObject("Users", user, "id", user.getId());
+    }
+
+    public void warnUser(User user, String warningText) {
+        user.addWarning(warningText);
+        Database database = new Database();
+        database.updateObject("Users", user, "id", user.getId());
+    }
 
     public ArrayList<CreatorRequest> getCreatorRequests() {
-        return new ArrayList<>();
+        Database database = new Database();
+        ArrayList<CreatorRequest> requests = new ArrayList<>();
+        ArrayList<Object> requestsDocs = database.getAllDocuments("CreatorRequests", Report.class);
+        for (Object requestDoc : requestsDocs) {
+            requests.add((CreatorRequest) requestDoc);
+        }
+        return requests;
     }
 }
