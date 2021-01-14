@@ -3,13 +3,21 @@ package Models;
 public class ImagePost extends PostDecorator {
     private Object content;
     private Object context;
-
+    private Post post;
     public ImagePost() {
     }
 
-    public ImagePost(Object content, Object context) {
-        this.content = content;
+    public ImagePost(Post post, Object context) {
         this.context = context;
+        this.post = post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public Post getPostItem() {
+        return this.post;
     }
 
     public Object getContent() {
@@ -30,7 +38,7 @@ public class ImagePost extends PostDecorator {
 
     @Override
     public Post getPost() {
-        return null;
+        return this;
     }
 
     public String getAltText() {

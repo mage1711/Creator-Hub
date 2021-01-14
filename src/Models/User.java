@@ -1,6 +1,8 @@
 package Models;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class User {
     private String id;
@@ -14,6 +16,10 @@ public class User {
     }
 
     public User(String name, String country, String email) {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        this.id = generatedString;
         this.name = name;
         this.country = country;
         this.email = email;
