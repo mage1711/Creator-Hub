@@ -1,11 +1,12 @@
-package main;
+package Controllers;
 
+import Models.User;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,17 +19,18 @@ class DatabaseTest {
     private MongoClient client;
     private MongoDatabase database;
     private String connectionString = "mongodb+srv://admin:90ZVui6wnRLIL2e9@Cluster1.kocpj.mongodb.net/<dbname>?retryWrites=true&w=majority";
+    private Database db;
+    private String databaseName = "CreatorHub";
 
     @BeforeEach
     void setUp() {
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         this.client = new MongoClient(new MongoClientURI(this.connectionString));
-
+        db = new Database();
     }
 
-    @BeforeAll
-    static void beforeAll() {
-
+    @AfterEach
+    void tearDown() {
     }
 
     @Test
@@ -40,4 +42,32 @@ class DatabaseTest {
         }
     }
 
+    @Test
+    void connectToDatabase() {
+    }
+
+    @Test
+    void getCollection() {
+    }
+
+    @Test
+    void getAllDocuments() {
+        db.getAllDocuments("Users", User.class);
+    }
+
+    @Test
+    void getDocument() {
+    }
+
+    @Test
+    void insertObject() {
+    }
+
+    @Test
+    void deleteObject() {
+    }
+
+    @Test
+    void updateObject() {
+    }
 }
