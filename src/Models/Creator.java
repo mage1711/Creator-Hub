@@ -106,7 +106,11 @@ public class Creator extends User implements Observer {
     public void withDrawMoney(double amount) {}
 
     @Override
-    public void update() {
-
+    /*public void update(Creator creator,ArrayList<Chat> chats) {
+       creator.setChats(chats);
+    }*/
+    public void update(){
+        System.out.println( "you have a new message: " + getChats());
     }
+
 }
