@@ -1,26 +1,37 @@
 package Models;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class Post {
     private String id;
     private ArrayList<User> likes;
     private Date date;
     private String text;
+    private String type;
     private boolean subscriberOnly;
     private Creator poster;
 
     public Post() {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        this.id = generatedString;
     }
 
-    public Post(String id, ArrayList<User> likes, Date date, String text, boolean subscriberOnly, Creator poster) {
-        this.id = id;
+    public Post( ArrayList<User> likes, Date date, String text, boolean subscriberOnly, Creator poster, String type) {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        this.id = generatedString;
         this.likes = likes;
         this.date = date;
         this.text = text;
         this.subscriberOnly = subscriberOnly;
         this.poster = poster;
+        this.type = type;
     }
 
     public String getId() {
@@ -71,9 +82,29 @@ public class Post {
         this.poster = poster;
     }
 
-    public void likePost(User user) {}
+    public String getType() {
+        return type;
+    }
 
-    public void unlikePost(User user) {}
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void likePost(User user) {
+        this.likes.add(user);
+    }
+
+    public void unlikePost(User user) {
+        User delete = new User();
+        for (User u: this.likes
+             ) {
+            if(u.getId() == user.getId()){
+                delete = u;
+            }
+        }
+        this.likes.remove(delete);
+    }
 
     public void deletePost() {}
+
 }

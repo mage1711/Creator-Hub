@@ -3,13 +3,13 @@ package Models;
 public class VideoPost extends PostDecorator {
     private Object content;
     private Object context;
-
+    private Post post;
     public VideoPost() {
     }
 
-    public VideoPost(Object content, Object context) {
-        this.content = content;
+    public VideoPost(Post post, Object context) {
         this.context = context;
+        this.post = post;
     }
 
     public Object getContent() {
@@ -32,8 +32,16 @@ public class VideoPost extends PostDecorator {
         return null;
     }
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public Post getPostItem() {
+        return this.post;
+    }
+
     @Override
     public Post getPost() {
-        return null;
+        return this;
     }
 }

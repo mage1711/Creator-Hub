@@ -18,6 +18,10 @@ public class User {
     }
 
     public User(String name, String country, String email) {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        this.id = generatedString;
         this.name = name;
         this.country = country;
         this.email = email;
