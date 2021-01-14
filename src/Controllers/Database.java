@@ -34,6 +34,10 @@ public class Database {
         }
     }
 
+    public MongoDatabase getDatabase() {
+        return database;
+    }
+
     public void connectToDatabase() {
         String databaseName = "CreatorHub";
         this.database = client.getDatabase(databaseName);
