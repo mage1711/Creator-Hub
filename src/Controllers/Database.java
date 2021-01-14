@@ -2,13 +2,16 @@ package Controllers;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
-import org.jetbrains.annotations.NotNull;
+import com.google.gson.Gson;
+//import org.jetbrains.annotations.NotNull;
 
+import javax.print.Doc;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,40 +21,67 @@ public class Database {
     private String connectionString = "mongodb+srv://admin:90ZVui6wnRLIL2e9@Cluster1.kocpj.mongodb.net/<dbname>?retryWrites=true&w=majority";
     private MongoDatabase database;
     private String databaseName = "CreatorHub";
+    private Gson gson = new Gson();
 
-   public Database() {
+    public Database() {
         DatabaseConnection();
-        ConnectToDatabase();
+        connectToDatabase();
     }
 
     public void DatabaseConnection() {
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         try {
             this.client = new MongoClient(new MongoClientURI(this.connectionString));
-
         } catch (Exception e) {
             System.out.println("Cannot connect:" + e);
         }
     }
 
-    public void ConnectToDatabase() {
+    public void connectToDatabase() {
         this.database = client.getDatabase(databaseName);
     }
 
-    public MongoCollection GetCollection(String collectionName){
+    public MongoCollection<Document> getCollection(String collectionName) {
         return database.getCollection(collectionName);
     }
 
-    public ArrayList<Document> GetAllDocuments(@NotNull MongoCollection collection){
-        FindIterable results = collection.find();
-        ArrayList<Document> documents = new ArrayList<>();
-        try (MongoCursor<Document> cursor = collection.find().iterator()) {
-            while (cursor.hasNext()) {
-               documents.add(cursor.next());
-            }
-        }
+    public ArrayList<Object> getAllDocuments(String collectionName, Type classType) {
+        MongoCollection<Document> collection = getCollection(collectionName);
+        ArrayList<Object> results = new ArrayList<>();
+        ArrayList<Document> documents = collection.find().into(new ArrayList<Document>());
         System.out.println(documents);
-        return documents;
+        for (Document document : documents) {
+            results.add(gson.fromJson(document.toJson(), classType));
+        }
+        System.out.println(results);
+        return results;
+    }
+
+    public ArrayList<Object> getDocument(String collectionName, String filterFieldName, Object filterFieldValue, Type classType) {
+        MongoCollection<Document> collection = getCollection(collectionName);
+        Document document = collection.find(Filters.eq(filterFieldName, filterFieldValue)).first();
+        if (document != null) {
+            return gson.fromJson(document.toJson(), classType);
+        }
+        return null;
+    }
+
+    public void insertObject(String collectionName ,Object object) {
+        MongoCollection<Document> collection = getCollection(collectionName);
+        collection.insertOne(Document.parse(gson.toJson(object)));
+        System.out.println("Inserted");
+    }
+
+    public void deleteObject(String collectionName, Object object, String fieldName, Object value) {
+        MongoCollection<Document> collection = getCollection(collectionName);
+        collection.deleteOne(Filters.eq(fieldName, value));
+        System.out.println("Deleted");
+    }
+
+    public void updateObject(String collectionName, Object object, String filterFieldName, Object filterFieldValue) {
+        MongoCollection<Document> collection = getCollection(collectionName);
+        Document document = Document.parse(gson.toJson(object));
+        collection.replaceOne(Filters.eq(filterFieldName, filterFieldValue), document);
     }
 
 }

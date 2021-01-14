@@ -1,6 +1,7 @@
-package main;
+package test.main;
 
 import Controllers.Database;
+import Models.User;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCursor;
@@ -13,19 +14,18 @@ import org.junit.jupiter.api.Test;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DatabaseTest {
     private MongoClient client;
     private MongoDatabase database;
     private String connectionString = "mongodb+srv://admin:90ZVui6wnRLIL2e9@Cluster1.kocpj.mongodb.net/<dbname>?retryWrites=true&w=majority";
     private Database db;
     private String databaseName = "CreatorHub";
+
     @BeforeEach
     void setUp() {
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         this.client = new MongoClient(new MongoClientURI(this.connectionString));
-       db = new Database();
+        db = new Database();
     }
 
     @BeforeAll
@@ -44,8 +44,7 @@ class DatabaseTest {
 
     @Test
     void getAllDocuments() {
-
-    db.GetAllDocuments( db.GetCollection("Users"));
+        db.getAllDocuments("Users", User.class);
     }
 
     @Test
