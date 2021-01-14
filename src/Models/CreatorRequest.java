@@ -4,6 +4,10 @@ public class CreatorRequest {
     private String id;
     private User user;
 
+    public CreatorRequest(User user) {
+        this.user = user;
+    }
+
     public CreatorRequest(String id, User user) {
         this.id = id;
         this.user = user;

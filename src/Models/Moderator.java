@@ -37,19 +37,32 @@ public class Moderator {
         this.email = email;
     }
 
-    public void acceptCreator(User user) {}
+    public void acceptCreator(User user) {
+        Creator creator = (Creator) user;
+        // TODO: Add to database
+    }
 
     public ArrayList<Report> getReports() {
+        // TODO: Retrieve from database
         return new ArrayList<>();
     }
 
-    public void deletePost(Post post) {}
+    public void deletePost(Post post) {
+        // TODO: Delete from database
+    }
 
-    public void banUser(User user) {}
+    public void banUser(User user) {
+        user.setBanned(true);
+        // TODO: Update in database
+    }
 
-    public void warnUser(User user) {}
+    public void warnUser(User user, String warningText) {
+        user.addWarning(warningText);
+        // TODO: Update in database
+    }
 
     public ArrayList<CreatorRequest> getCreatorRequests() {
+        // TODO: Get from database
         return new ArrayList<>();
     }
 }

@@ -91,9 +91,13 @@ public class Creator extends User implements Observer {
         this.chats = chats;
     }
 
-    public void addPost(Post post) {}
+    public void addPost(Post post) {
+        // TODO: Add to database
+    }
 
-    public void deletePOst(Post post) {}
+    public void deletePOst(Post post) {
+        // TODO: Delete from database
+    }
 
     public int getLikesCount() {
         return 0;
@@ -103,7 +107,21 @@ public class Creator extends User implements Observer {
         return new HashMap<>();
     }
 
-    public void withDrawMoney(double amount) {}
+    public void withDrawMoney(double amount) {
+        System.out.println("Withdrawing Money");
+        if (amount <= this.moneyEarned && amount > 0) {
+            this.moneyEarned -= amount;
+            System.out.println("Money withdrawn successfully");
+        } else {
+            // TODO: Add error handling instead
+            System.out.println("Invalid value entered");
+        }
+    }
+
+    public void addChat(Chat chat) {
+        this.chats.add(chat);
+        // TODO: Submit Changes to database
+    }
 
     @Override
     public void update() {

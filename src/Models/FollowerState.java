@@ -14,7 +14,8 @@ public class FollowerState extends ViewerState {
         super(id, name, country, email, banned, warnings);
     }
 
-    public void unfollow(Creator creator) {}
-
-    public void subscribe(Creator creator) {}
+    public void unfollow(Creator creator) {
+        this.followedCreators.remove(creator);
+        // TODO: Submit changes to database
+    }
 }

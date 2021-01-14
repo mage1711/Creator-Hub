@@ -77,4 +77,8 @@ public class User {
     public void setWarnings(ArrayList<String> warnings) {
         this.warnings = warnings;
     }
+
+    public void addWarning(String warning) {
+        this.warnings.add(warning);
+    }
 }

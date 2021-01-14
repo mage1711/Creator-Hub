@@ -14,7 +14,13 @@ public class NormalState extends ViewerState {
         super(id, name, country, email, banned, warnings);
     }
 
-    public void follow(Creator creator) {}
+    public void follow(Creator creator) {
+        this.followedCreators.add(creator);
+        // TODO: Update in database
+    }
 
-    public void subscribe(Creator creator) {}
+    public void subscribe(Creator creator) {
+        this.subscribed.add(creator);
+        // TODO: Update in database
+    }
 }
