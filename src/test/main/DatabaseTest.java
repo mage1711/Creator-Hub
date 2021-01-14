@@ -1,5 +1,6 @@
 package main;
 
+import Controllers.Database;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCursor;
@@ -18,12 +19,13 @@ class DatabaseTest {
     private MongoClient client;
     private MongoDatabase database;
     private String connectionString = "mongodb+srv://admin:90ZVui6wnRLIL2e9@Cluster1.kocpj.mongodb.net/<dbname>?retryWrites=true&w=majority";
-
+    private Database db;
+    private String databaseName = "CreatorHub";
     @BeforeEach
     void setUp() {
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         this.client = new MongoClient(new MongoClientURI(this.connectionString));
-
+       db = new Database();
     }
 
     @BeforeAll
@@ -39,5 +41,20 @@ class DatabaseTest {
             System.out.println(cursor.next());
         }
     }
+
+    @Test
+    void getAllDocuments() {
+
+    db.GetAllDocuments( db.GetCollection("Users"));
+    }
+
+    @Test
+    void connectToDatabase() {
+    }
+
+    @Test
+    void getCollection() {
+    }
+
 
 }

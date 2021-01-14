@@ -4,8 +4,12 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +19,7 @@ public class Database {
     private MongoDatabase database;
     private String databaseName = "CreatorHub";
 
-    Database() {
+   public Database() {
         DatabaseConnection();
         ConnectToDatabase();
     }
@@ -38,9 +42,17 @@ public class Database {
         return database.getCollection(collectionName);
     }
 
-    public void GetAllDocuments(MongoCollection collection){
+    public ArrayList<Document> GetAllDocuments(@NotNull MongoCollection collection){
         FindIterable results = collection.find();
-
+        ArrayList<Document> documents = new ArrayList<>();
+        try (MongoCursor<Document> cursor = collection.find().iterator()) {
+            while (cursor.hasNext()) {
+               documents.add(cursor.next());
+            }
+        }
+        System.out.println(documents);
+        return documents;
     }
+
 }
 
