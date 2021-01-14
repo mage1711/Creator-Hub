@@ -1,40 +1,42 @@
 package Models;
 
+import org.bson.Document;
+
 public class PostContent {
-    private String name;
-    private String size;
-    private String metadata;
+    private String contentId;
+    private long size;
+    private Document metadata;
 
     public PostContent() {
     }
 
-    public PostContent(String name, String size, String metadata) {
-        this.name = name;
+    public PostContent(String contentId, long size, Document metadata) {
+        this.contentId = contentId;
         this.size = size;
         this.metadata = metadata;
     }
 
-    public String getName() {
-        return name;
+    public String getContentId() {
+        return contentId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
     }
 
-    public String getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(long size) {
         this.size = size;
     }
 
-    public String getMetadata() {
+    public Document getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(String metadata) {
+    public void setMetadata(Document metadata) {
         this.metadata = metadata;
     }
 }

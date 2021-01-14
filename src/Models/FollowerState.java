@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class FollowerState extends ViewerState {
@@ -14,7 +16,9 @@ public class FollowerState extends ViewerState {
         super(id, name, country, email, banned, warnings);
     }
 
-    public void unfollow(Creator creator) {}
-
-    public void subscribe(Creator creator) {}
+    public void unfollow(Creator creator) {
+        this.followedCreators.remove(creator);
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
+    }
 }
