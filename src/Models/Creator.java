@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -91,26 +93,49 @@ public class Creator extends User implements Observer {
         this.chats = chats;
     }
 
-    public void addPost(Post post) {}
+    public void addPost(Post post) {
+        Database database = new Database();
+        database.insertObject("Posts", post);
+    }
 
-    public void deletePOst(Post post) {}
+    public void deletePost(Post post) {
+        Database database = new Database();
+        database.deleteObject("Posts", post, "id", post.getId());
+    }
 
     public int getLikesCount() {
+        // TODO: Update later
         return 0;
     }
 
     public HashMap<String, Double> getAnalytics() {
+        // TODO: Update later
         return new HashMap<>();
     }
 
-    public void withDrawMoney(double amount) {}
+    public void withDrawMoney(double amount) {
+        System.out.println("Withdrawing Money");
+        if (amount <= this.moneyEarned && amount > 0) {
+            this.moneyEarned -= amount;
+            System.out.println("Money withdrawn successfully");
+        } else {
+            // TODO: Add error handling instead
+            System.out.println("Invalid value entered");
+        }
+    }
+
+    public void addChat(Chat chat) {
+        this.chats.add(chat);
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
+    }
 
     @Override
-    /*public void update(Creator creator,ArrayList<Chat> chats) {
-       creator.setChats(chats);
-    }*/
-    public void update(){
-        System.out.println( "you have a new message: " + getChats());
+    public void update() {
+        Database database = new Database();
+        Creator updatedObject = (Creator) database.getDocument("Users", "id", this.getId(), Creator.class);
+        this.chats = updatedObject.chats;
+        System.out.println( "you have a new message");
     }
 
 }

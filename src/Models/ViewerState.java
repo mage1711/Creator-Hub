@@ -1,8 +1,13 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class ViewerState extends User {
+    protected ArrayList<Creator> followedCreators;
+    protected ArrayList<Creator> subscribed;
+
     public ViewerState() {
     }
 
@@ -14,11 +19,33 @@ public class ViewerState extends User {
         super(id, name, country, email, banned, warnings);
     }
 
-    public void becomeCreator() {}
+    public void becomeCreator() {
+         CreatorRequest creatorRequest = new CreatorRequest(this);
 
-    public void follow(Creator creator) {}
+        Database database = new Database();
+        database.insertObject("CreatorRequests", creatorRequest);
+    }
 
-    public void subscribe(Creator creator) {}
+    public void reportCreator(Creator creator, String reportText) {
+        Report report = new Report(null, this, creator, reportText);
 
-    public void reportCreator(Creator creator) {}
+        Database database = new Database();
+        database.insertObject("Reports", report);
+    }
+
+    public ArrayList<Creator> getFollowedCreators() {
+        return followedCreators;
+    }
+
+    public void setFollowedCreators(ArrayList<Creator> followedCreators) {
+        this.followedCreators = followedCreators;
+    }
+
+    public ArrayList<Creator> getSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(ArrayList<Creator> subscribed) {
+        this.subscribed = subscribed;
+    }
 }

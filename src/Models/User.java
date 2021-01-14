@@ -9,6 +9,7 @@ public class User {
     private String email;
     private boolean banned;
     private ArrayList<String> warnings;
+    private String password;
 
     public User() {
     }
@@ -19,6 +20,15 @@ public class User {
         this.email = email;
         this.banned = false;
         this.warnings = new ArrayList<>();
+    }
+
+    public User(String name, String country, String email, String password) {
+        this.name = name;
+        this.country = country;
+        this.email = email;
+        this.banned = false;
+        this.warnings = new ArrayList<>();
+        this.password = password;
     }
 
     public User(String id, String name, String country, String email, boolean banned, ArrayList<String> warnings) {
@@ -70,11 +80,23 @@ public class User {
         this.banned = banned;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public ArrayList<String> getWarnings() {
         return warnings;
     }
 
     public void setWarnings(ArrayList<String> warnings) {
         this.warnings = warnings;
+    }
+
+    public void addWarning(String warning) {
+        this.warnings.add(warning);
     }
 }
