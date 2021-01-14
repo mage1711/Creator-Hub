@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -92,18 +94,22 @@ public class Creator extends User implements Observer {
     }
 
     public void addPost(Post post) {
-        // TODO: Add to database
+        Database database = new Database();
+        database.insertObject("Posts", post);
     }
 
-    public void deletePOst(Post post) {
-        // TODO: Delete from database
+    public void deletePost(Post post) {
+        Database database = new Database();
+        database.deleteObject("Posts", post, "id", post.getId());
     }
 
     public int getLikesCount() {
+        // TODO: Update later
         return 0;
     }
 
     public HashMap<String, Double> getAnalytics() {
+        // TODO: Update later
         return new HashMap<>();
     }
 
@@ -120,15 +126,16 @@ public class Creator extends User implements Observer {
 
     public void addChat(Chat chat) {
         this.chats.add(chat);
-        // TODO: Submit Changes to database
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
     }
 
     @Override
-    /*public void update(Creator creator,ArrayList<Chat> chats) {
-       creator.setChats(chats);
-    }*/
-    public void update(){
-        System.out.println( "you have a new message: " + getChats());
+    public void update() {
+        Database database = new Database();
+        Creator updatedObject = (Creator) database.getDocument("Users", "id", this.getId(), Creator.class);
+        this.chats = updatedObject.chats;
+        System.out.println( "you have a new message");
     }
 
 }

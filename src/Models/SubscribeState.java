@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class SubscribeState extends ViewerState {
@@ -34,11 +36,15 @@ public class SubscribeState extends ViewerState {
         Chat chat = new Chat(creator, this, new ArrayList<>(), new ArrayList<>());
         this.chats.add(chat);
         creator.addChat(chat);
-        // TODO: Submit updates
+
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
     }
 
     public void unsubscribe(Creator creator) {
         this.subscribed.remove(creator);
-        // TODO: Update in database
+
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
     }
 }

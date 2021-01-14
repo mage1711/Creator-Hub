@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class ViewerState extends User {
@@ -19,12 +21,16 @@ public class ViewerState extends User {
 
     public void becomeCreator() {
          CreatorRequest creatorRequest = new CreatorRequest(this);
-         // TODO: Submit request to database
+
+        Database database = new Database();
+        database.insertObject("CreatorRequests", creatorRequest);
     }
 
     public void reportCreator(Creator creator, String reportText) {
         Report report = new Report(null, this, creator, reportText);
-        // TODO: Submit report to database
+
+        Database database = new Database();
+        database.insertObject("Reports", report);
     }
 
     public ArrayList<Creator> getFollowedCreators() {

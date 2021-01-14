@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class FollowerState extends ViewerState {
@@ -16,6 +18,7 @@ public class FollowerState extends ViewerState {
 
     public void unfollow(Creator creator) {
         this.followedCreators.remove(creator);
-        // TODO: Submit changes to database
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
     }
 }

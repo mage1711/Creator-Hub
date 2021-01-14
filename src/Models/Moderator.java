@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class Moderator {
@@ -39,30 +41,44 @@ public class Moderator {
 
     public void acceptCreator(User user) {
         Creator creator = (Creator) user;
-        // TODO: Add to database
+        Database database = new Database();
+        database.updateObject("Users", creator, "id", creator.getId());
     }
 
     public ArrayList<Report> getReports() {
-        // TODO: Retrieve from database
-        return new ArrayList<>();
+        Database database = new Database();
+        ArrayList<Report> reports = new ArrayList<>();
+        ArrayList<Object> reportsDocs = database.getAllDocuments("Reports", Report.class);
+        for (Object reportsDoc : reportsDocs) {
+            reports.add((Report) reportsDoc);
+        }
+        return reports;
     }
 
     public void deletePost(Post post) {
-        // TODO: Delete from database
+        Database database = new Database();
+        database.deleteObject("Posts", post, "id", post.getId());
     }
 
     public void banUser(User user) {
         user.setBanned(true);
-        // TODO: Update in database
+        Database database = new Database();
+        database.updateObject("Users", user, "id", user.getId());
     }
 
     public void warnUser(User user, String warningText) {
         user.addWarning(warningText);
-        // TODO: Update in database
+        Database database = new Database();
+        database.updateObject("Users", user, "id", user.getId());
     }
 
     public ArrayList<CreatorRequest> getCreatorRequests() {
-        // TODO: Get from database
-        return new ArrayList<>();
+        Database database = new Database();
+        ArrayList<CreatorRequest> requests = new ArrayList<>();
+        ArrayList<Object> requestsDocs = database.getAllDocuments("CreatorRequests", Report.class);
+        for (Object requestDoc : requestsDocs) {
+            requests.add((CreatorRequest) requestDoc);
+        }
+        return requests;
     }
 }

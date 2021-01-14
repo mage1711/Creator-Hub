@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.Database;
+
 import java.util.ArrayList;
 
 public class NormalState extends ViewerState {
@@ -16,11 +18,15 @@ public class NormalState extends ViewerState {
 
     public void follow(Creator creator) {
         this.followedCreators.add(creator);
-        // TODO: Update in database
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
+        System.out.println("Updated");
     }
 
     public void subscribe(Creator creator) {
         this.subscribed.add(creator);
-        // TODO: Update in database
+        Database database = new Database();
+        database.updateObject("Users", this, "id", this.getId());
+        System.out.println("");
     }
 }
