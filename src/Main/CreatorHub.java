@@ -1,5 +1,3 @@
-package Main;
-
 import Controllers.Database;
 
 public class CreatorHub {
