@@ -1,6 +1,7 @@
 package Models;
 
-import org.junit.Assert;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ class VideoConverterTest {
     @Test
     void convertVideo() throws IOException {
         InputStream content = VideoConverter.GetVideo();
-        Assert.assertNotNull(content);
+        Assertions.assertNotNull(content);
         System.out.println(VideoConverter.ConvertVideo());
     }
     @Test

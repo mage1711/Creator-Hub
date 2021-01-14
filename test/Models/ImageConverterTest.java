@@ -1,7 +1,7 @@
 package Models;
 
 import org.bson.types.ObjectId;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class ImageConverterTest {
     @Test
     void convertFile() throws IOException {
         File image = ImageConverter.GetImage();
-        Assert.assertNotNull(image);
+        Assertions.assertNotNull(image);
         System.out.println(ImageConverter.ConvertImage(image));
     }
 
@@ -28,11 +28,11 @@ class ImageConverterTest {
     @Test
     void GetImageAsFile() throws IOException {
         File image = ImageConverter.GetImage();
-        Assert.assertNotNull(image);
+        Assertions.assertNotNull(image);
         ObjectId id = ImageConverter.ConvertImage(image);
         System.out.println(id);
         File result = ImageConverter.GetImageAsFile(id);
-        Assert.assertNotNull(result);
+        Assertions.assertNotNull(result);
         System.out.println(result.getName());
     }
 }
