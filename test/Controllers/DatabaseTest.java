@@ -1,18 +1,19 @@
-package test.main;
+package Controllers;
 
-import Controllers.Database;
 import Models.User;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
     private MongoClient client;
@@ -28,9 +29,8 @@ class DatabaseTest {
         db = new Database();
     }
 
-    @BeforeAll
-    static void beforeAll() {
-
+    @AfterEach
+    void tearDown() {
     }
 
     @Test
@@ -43,11 +43,6 @@ class DatabaseTest {
     }
 
     @Test
-    void getAllDocuments() {
-        db.getAllDocuments("Users", User.class);
-    }
-
-    @Test
     void connectToDatabase() {
     }
 
@@ -55,5 +50,24 @@ class DatabaseTest {
     void getCollection() {
     }
 
+    @Test
+    void getAllDocuments() {
+        db.getAllDocuments("Users", User.class);
+    }
 
+    @Test
+    void getDocument() {
+    }
+
+    @Test
+    void insertObject() {
+    }
+
+    @Test
+    void deleteObject() {
+    }
+
+    @Test
+    void updateObject() {
+    }
 }
