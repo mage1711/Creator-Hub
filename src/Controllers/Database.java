@@ -1,20 +1,19 @@
 package Controllers;
 
+import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
-import com.google.gson.Gson;
-//import org.jetbrains.annotations.NotNull;
 
-import javax.print.Doc;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+//import org.jetbrains.annotations.NotNull;
 
 public class Database {
     private MongoClient client;
@@ -22,6 +21,10 @@ public class Database {
     private MongoDatabase database;
     private String databaseName = "CreatorHub";
     private Gson gson = new Gson();
+
+    public MongoClient getClient() {
+        return client;
+    }
 
     public Database() {
         DatabaseConnection();
@@ -35,6 +38,10 @@ public class Database {
         } catch (Exception e) {
             System.out.println("Cannot connect:" + e);
         }
+    }
+
+    public MongoDatabase getDatabase() {
+        return database;
     }
 
     public void connectToDatabase() {
