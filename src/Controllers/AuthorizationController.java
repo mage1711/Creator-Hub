@@ -2,13 +2,17 @@ package Controllers;
 
 import Models.User;
 
-public class AuthorizationController {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class AuthorizationController extends UnicastRemoteObject implements IAuthorization {
     public static User currentUser;
 
-    public AuthorizationController() {
+    public AuthorizationController() throws RemoteException {
     }
 
-    public static User login(String email, String password) {
+    @Override
+    public User login(String email, String password) {
         Database database = new Database();
         User user = (User) database.getDocument("Users", "email", email, User.class);
         if (user.getPassword().equals(password)) {
@@ -18,11 +22,13 @@ public class AuthorizationController {
         return null;
     }
 
-    public static void logout() {
+    @Override
+    public void logout() {
         currentUser = null;
     }
 
-    public static User signup(String email, String name, String password, String country) {
+    @Override
+    public User signup(String email, String name, String password, String country) {
         User user = new User(name, country, email, password);
         Database database = new Database();
         database.insertObject("Users", user);

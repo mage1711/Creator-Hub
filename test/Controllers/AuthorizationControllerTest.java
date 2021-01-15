@@ -3,21 +3,32 @@ package Controllers;
 import Models.User;
 import org.junit.jupiter.api.Test;
 
+import java.rmi.RemoteException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorizationControllerTest {
     private final Database database = new Database();
+    private AuthorizationController authorizationController;
+
+    AuthorizationControllerTest() {
+        try {
+            authorizationController = new AuthorizationController();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     void login() {
         // Prepare
         String inputEmail = "test@test.com";
         String inputPassword = "123123";
-        AuthorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
+        authorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
         AuthorizationController.currentUser = null;
 
         // Test
-        AuthorizationController.login(inputEmail, inputPassword);
+        authorizationController.login(inputEmail, inputPassword);
         assertEquals(inputEmail, AuthorizationController.currentUser.getEmail());
 
         // Clean
@@ -30,11 +41,11 @@ class AuthorizationControllerTest {
         // Prepare
         String inputEmail = "test@test.com";
         String inputPassword = "123123";
-        AuthorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
+        authorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
         AuthorizationController.currentUser = null;
 
         // Test
-        AuthorizationController.logout();
+        authorizationController.logout();
         assertNull(AuthorizationController.currentUser);
 
         // Clean
@@ -45,7 +56,7 @@ class AuthorizationControllerTest {
     void signup() {
         String inputEmail = "test@test.com";
         String inputPassword = "123123";
-        AuthorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
+        authorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
         assertEquals(inputEmail, AuthorizationController.currentUser.getEmail());
 
         // Clean
