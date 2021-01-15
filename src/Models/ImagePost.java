@@ -1,30 +1,30 @@
 package Models;
 
-public class ImagePost extends PostDecorator {
-    private Object content;
-    private Object context;
-    private Post post;
+import java.io.File;
+import java.io.IOException;
+
+public class ImagePost extends Post {
+    private PostContent content;
+    private Context context;
+
     public ImagePost() {
+        super();
     }
 
-    public ImagePost(Post post, Object context) {
-        this.context = context;
-        this.post = post;
+    public ImagePost(File file) throws IOException {
+        super();
+        context = new Context(new ImageConverter());
+        this.content = context.convertFile(file);
     }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    public Post getPostItem() {
-        return this.post;
+    public File GetImage() throws IOException {
+        return context.GetFile(content.getContentId());
     }
 
     public Object getContent() {
         return content;
     }
 
-    public void setContent(Object content) {
+    public void setContent(PostContent content) {
         this.content = content;
     }
 
@@ -32,16 +32,9 @@ public class ImagePost extends PostDecorator {
         return context;
     }
 
-    public void setContext(Object context) {
+    public void setContext(Context context) {
         this.context = context;
     }
 
-    @Override
-    public Post getPost() {
-        return this;
-    }
 
-    public String getAltText() {
-        return "";
-    }
 }

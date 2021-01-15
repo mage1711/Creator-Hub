@@ -1,8 +1,7 @@
-import Controllers.Database;
-import Models.*;
+package Main;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import Controllers.Database;
+import Models.User;
 import com.google.gson.Gson;
 
 public class CreatorHub {
@@ -11,12 +10,12 @@ public class CreatorHub {
          Gson gson = new Gson();
         db.DatabaseConnection();
         User user = new User("name","country","email");
-        ImagePost post = new ImagePost(new Post(),new Context());
-        db.insertObject("Posts",post);
-        post.setLikes(new ArrayList<User>());
-        post.likePost(user);
-        post.unlikePost(user);
-        db.updateObject("Posts",post,"post.id",post.getPostItem().getId());
+//        ImagePost post = new ImagePost(new Post());
+//        db.insertObject("Posts",post);
+//        post.setLikes(new ArrayList<User>());
+//        post.likePost(user);
+//        post.unlikePost(user);
+//        db.updateObject("Posts",post,"post.id",post.getPostItem().getId());
         /*ImagePost post = new ImagePost(new Post(),new PostContent("name","size","metadata"),new Context());
         db.insertObject("Posts",post);
         post.setLikes(new ArrayList<User>());

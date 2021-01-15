@@ -17,10 +17,15 @@ import static com.mongodb.client.model.Filters.eq;
 public class ImageConverter implements FileConverter {
     @Override
     public PostContent convertFile(File file) throws IOException {
-        ObjectId content = null;
-           content = ConvertImage(file);
-        PostContent postContent= new PostContent(content.toString(),GetSize(file),GenerateMetadata(file));
+        ObjectId contentId = null;
+        contentId = ConvertImage(file);
+        PostContent postContent= new PostContent(contentId,GetSize(file),GenerateMetadata(file));
         return postContent;
+    }
+
+    @Override
+    public File GetFile(ObjectId id) throws IOException {
+        return GetImageAsFile(id);
     }
 
     public static ObjectId ConvertImage(File file) throws IOException {

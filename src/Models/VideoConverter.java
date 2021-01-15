@@ -14,6 +14,12 @@ public class VideoConverter implements FileConverter {
     public PostContent convertFile(File file) {
         return null;
     }
+
+    @Override
+    public File GetFile(ObjectId id) throws IOException {
+        return null;
+    }
+
     public static ObjectId ConvertVideo() throws IOException {
         Database db = new Database();
         GridFSBucket gridBucket = GridFSBuckets.create(db.getDatabase(), "Video");

@@ -1,26 +1,27 @@
 package Models;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public class PostContent {
-    private String contentId;
+    private ObjectId contentId;
     private long size;
     private Document metadata;
 
     public PostContent() {
     }
 
-    public PostContent(String contentId, long size, Document metadata) {
+    public PostContent(ObjectId contentId, long size, Document metadata) {
         this.contentId = contentId;
         this.size = size;
         this.metadata = metadata;
     }
 
-    public String getContentId() {
+    public ObjectId getContentId() {
         return contentId;
     }
 
-    public void setContentId(String contentId) {
+    public void setContentId(ObjectId  contentId) {
         this.contentId = contentId;
     }
 
