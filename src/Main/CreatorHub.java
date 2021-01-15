@@ -1,27 +1,22 @@
 package Main;
 
+import Controllers.AuthorizationController;
 import Controllers.Database;
+import Controllers.IAuthorization;
 import Models.User;
 import com.google.gson.Gson;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 public class CreatorHub {
-    public static void main(String[] args) {
-        Database db = new Database();
-         Gson gson = new Gson();
-        db.DatabaseConnection();
-        User user = new User("name","country","email");
-//        ImagePost post = new ImagePost(new Post());
-//        db.insertObject("Posts",post);
-//        post.setLikes(new ArrayList<User>());
-//        post.likePost(user);
-//        post.unlikePost(user);
-//        db.updateObject("Posts",post,"post.id",post.getPostItem().getId());
-        /*ImagePost post = new ImagePost(new Post(),new PostContent("name","size","metadata"),new Context());
-        db.insertObject("Posts",post);
-        post.setLikes(new ArrayList<User>());
-        post.likePost(new User("name","country","email"));
-        post.setSubscriberOnly(true);
-        db.updateObject("Posts",post,"post.id",post.getPostItem().getId());
-        System.out.println(post.getPostItem().getId());*/
+    public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+        IAuthorization authorizationController = new AuthorizationController();
+
+        Registry registry = LocateRegistry.createRegistry(1099);
+        registry.bind("authorizationController", authorizationController);
+        System.out.println("ready!");
     }
 }

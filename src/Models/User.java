@@ -1,11 +1,12 @@
 package Models;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class User {
+public class User implements Serializable {
     private String id;
     private String name;
     private String country;
