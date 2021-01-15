@@ -1,11 +1,12 @@
 package Models;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-public class Post {
+public class Post implements Serializable {
     private String id;
     private ArrayList<User> likes;
     private Date date;
