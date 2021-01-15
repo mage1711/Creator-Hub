@@ -1,26 +1,24 @@
 package Models;
 
+import org.bson.types.ObjectId;
+
 import java.io.File;
+import java.io.IOException;
 
 public class Context {
     private FileConverter converter;
 
-    public Context() {
-    }
 
     public Context(FileConverter converter) {
         this.converter = converter;
     }
 
-    public Object getConverter() {
-        return converter;
+    public PostContent convertFile(File file) throws IOException {
+        return converter.convertFile(file);
     }
 
-    public void setConverter(FileConverter converter) {
-        this.converter = converter;
+    public File GetFile(ObjectId id) throws IOException {
+        return converter.GetFile(id);
     }
 
-    public Object convertFile(File file) {
-        return null;
-    }
 }
