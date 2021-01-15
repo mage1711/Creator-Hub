@@ -21,7 +21,7 @@ public class VideoConverter implements FileConverter {
     }
 
     public static ObjectId ConvertVideo() throws IOException {
-        Database db = new Database();
+        Database db = Database.getCurrentDatabase();
         GridFSBucket gridBucket = GridFSBuckets.create(db.getDatabase(), "Video");
         GridFSUploadOptions uploadOptions = new GridFSUploadOptions().chunkSizeBytes(5120).metadata(new Document("type", "video").append("content_type", "video/mp4"));
         InputStream inStream = GetVideo();

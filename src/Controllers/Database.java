@@ -18,8 +18,16 @@ public class Database {
     private MongoClient client;
     private MongoDatabase database;
     private final Gson gson = new Gson();
+    private static Database currentDatabase;
 
-    public Database() {
+    public static Database getCurrentDatabase() {
+        if (currentDatabase == null) {
+            currentDatabase = new Database();
+        }
+        return currentDatabase;
+    }
+
+    private Database() {
         DatabaseConnection();
         connectToDatabase();
     }

@@ -13,7 +13,7 @@ public class AuthorizationController extends UnicastRemoteObject implements IAut
 
     @Override
     public User login(String email, String password) {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         User user = (User) database.getDocument("Users", "email", email, User.class);
         if (user.getPassword().equals(password)) {
             currentUser = user;
@@ -30,7 +30,7 @@ public class AuthorizationController extends UnicastRemoteObject implements IAut
     @Override
     public User signup(String email, String name, String password, String country) {
         User user = new User(name, country, email, password);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.insertObject("Users", user);
         user = (User) database.getDocument("Users", "email", email, User.class);
         currentUser = user;

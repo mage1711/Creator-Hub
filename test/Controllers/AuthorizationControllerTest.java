@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorizationControllerTest {
-    private final Database database = new Database();
+    private final Database database = Database.getCurrentDatabase();
     private AuthorizationController authorizationController;
 
     AuthorizationControllerTest() {
@@ -22,7 +22,7 @@ class AuthorizationControllerTest {
     @Test
     void login() {
         // Prepare
-        String inputEmail = "test@test.com";
+        String inputEmail = "test@test.test";
         String inputPassword = "123123";
         authorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
         AuthorizationController.currentUser = null;
@@ -39,7 +39,7 @@ class AuthorizationControllerTest {
     @Test
     void logout() {
         // Prepare
-        String inputEmail = "test@test.com";
+        String inputEmail = "test@test.test";
         String inputPassword = "123123";
         authorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
         AuthorizationController.currentUser = null;
@@ -54,7 +54,7 @@ class AuthorizationControllerTest {
 
     @Test
     void signup() {
-        String inputEmail = "test@test.com";
+        String inputEmail = "test@test.test";
         String inputPassword = "123123";
         authorizationController.signup(inputEmail, "Test", inputPassword, "Egypt");
         assertEquals(inputEmail, AuthorizationController.currentUser.getEmail());

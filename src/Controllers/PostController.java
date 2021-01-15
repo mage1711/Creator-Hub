@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class PostController {
     public static void main(String[] args) throws IOException {
-        Database db = new Database();
+        Database db = Database.getCurrentDatabase();
         Gson gson = new Gson();
         db.DatabaseConnection();
 

@@ -41,12 +41,12 @@ public class Moderator {
 
     public void acceptCreator(User user) {
         Creator creator = (Creator) user;
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", creator, "id", creator.getId());
     }
 
     public ArrayList<Report> getReports() {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         ArrayList<Report> reports = new ArrayList<>();
         ArrayList<Object> reportsDocs = database.getAllDocuments("Reports", Report.class);
         for (Object reportsDoc : reportsDocs) {
@@ -56,24 +56,24 @@ public class Moderator {
     }
 
     public void deletePost(Post post) {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.deleteObject("Posts", post, "id", post.getId());
     }
 
     public void banUser(User user) {
         user.setBanned(true);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", user, "id", user.getId());
     }
 
     public void warnUser(User user, String warningText) {
         user.addWarning(warningText);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", user, "id", user.getId());
     }
 
     public ArrayList<CreatorRequest> getCreatorRequests() {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         ArrayList<CreatorRequest> requests = new ArrayList<>();
         ArrayList<Object> requestsDocs = database.getAllDocuments("CreatorRequests", Report.class);
         for (Object requestDoc : requestsDocs) {

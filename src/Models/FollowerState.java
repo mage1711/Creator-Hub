@@ -18,7 +18,7 @@ public class FollowerState extends ViewerState {
 
     public void unfollow(Creator creator) {
         this.followedCreators.remove(creator);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
     }
 }

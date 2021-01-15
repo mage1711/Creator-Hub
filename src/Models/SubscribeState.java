@@ -37,14 +37,14 @@ public class SubscribeState extends ViewerState {
         this.chats.add(chat);
         creator.addChat(chat);
 
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
     }
 
     public void unsubscribe(Creator creator) {
         this.subscribed.remove(creator);
 
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
     }
 }

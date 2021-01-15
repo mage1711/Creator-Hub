@@ -26,7 +26,7 @@ class DatabaseTest {
     void setUp() {
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         this.client = new MongoClient(new MongoClientURI(this.connectionString));
-        db = new Database();
+        db = Database.getCurrentDatabase();
     }
 
     @AfterEach

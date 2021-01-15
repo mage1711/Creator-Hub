@@ -22,14 +22,14 @@ public class ViewerState extends User {
     public void becomeCreator() {
          CreatorRequest creatorRequest = new CreatorRequest(this);
 
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.insertObject("CreatorRequests", creatorRequest);
     }
 
     public void reportCreator(Creator creator, String reportText) {
         Report report = new Report(null, this, creator, reportText);
 
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.insertObject("Reports", report);
     }
 

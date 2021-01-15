@@ -18,14 +18,14 @@ public class NormalState extends ViewerState {
 
     public void follow(Creator creator) {
         this.followedCreators.add(creator);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
         System.out.println("Updated");
     }
 
     public void subscribe(Creator creator) {
         this.subscribed.add(creator);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
         System.out.println("");
     }

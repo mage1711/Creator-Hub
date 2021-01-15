@@ -29,7 +29,7 @@ public class ImageConverter implements FileConverter {
     }
 
     public static ObjectId ConvertImage(File file) throws IOException {
-        Database db = new Database();
+        Database db = Database.getCurrentDatabase();
         GridFSBucket gridBucket = GridFSBuckets.create(db.getDatabase(), "Photo");
         GridFSUploadOptions uploadOptions = new GridFSUploadOptions().chunkSizeBytes(2048).metadata(GenerateMetadata(file));
         InputStream inStream = new FileInputStream(file);
@@ -60,7 +60,7 @@ public static Document GenerateMetadata(File file) throws IOException {
     return metadata;
 }
 public static File GetImageAsFile(ObjectId id) throws IOException {
-    Database db = new Database();
+    Database db = Database.getCurrentDatabase();
     GridFSBucket gridBucket = GridFSBuckets.create(db.getDatabase(), "Photo");
     GridFSFile gridFSFile = gridBucket.find(eq("_id",id)).first();
     System.out.println("File Name:- " + gridFSFile.getFilename());

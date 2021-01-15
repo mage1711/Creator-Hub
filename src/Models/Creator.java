@@ -94,12 +94,12 @@ public class Creator extends User implements Observer {
     }
 
     public void addPost(Post post) {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.insertObject("Posts", post);
     }
 
     public void deletePost(Post post) {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.deleteObject("Posts", post, "id", post.getId());
     }
 
@@ -126,13 +126,13 @@ public class Creator extends User implements Observer {
 
     public void addChat(Chat chat) {
         this.chats.add(chat);
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
     }
 
     @Override
     public void update() {
-        Database database = new Database();
+        Database database = Database.getCurrentDatabase();
         Creator updatedObject = (Creator) database.getDocument("Users", "id", this.getId(), Creator.class);
         this.chats = updatedObject.chats;
         System.out.println( "you have a new message");
