@@ -1,14 +1,13 @@
 package Models;
 
 
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class VideoConverterTest {
 
@@ -17,16 +16,24 @@ class VideoConverterTest {
     }
 
     @Test
-    void convertFile() {
+    void convertFile() throws IOException {
+        File video = VideoConverter.GetVideo();
+        Assertions.assertNotNull(video);
+        System.out.println(ImageConverter.ConvertImage(video));
     }
 
     @Test
-    void convertVideo() throws IOException {
-        InputStream content = VideoConverter.GetVideo();
-        Assertions.assertNotNull(content);
-        System.out.println(VideoConverter.ConvertVideo());
+    void convertImage() {
     }
+
     @Test
-    void getVideo() {
+    void GetVideoAsFile() throws IOException {
+        File image = ImageConverter.GetImage();
+        Assertions.assertNotNull(image);
+        ObjectId id = ImageConverter.ConvertImage(image);
+        System.out.println(id);
+        File result = ImageConverter.GetImageAsFile(id);
+        Assertions.assertNotNull(result);
+        System.out.println(result.getName());
     }
 }

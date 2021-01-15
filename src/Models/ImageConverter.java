@@ -17,8 +17,7 @@ import static com.mongodb.client.model.Filters.eq;
 public class ImageConverter implements FileConverter {
     @Override
     public PostContent convertFile(File file) throws IOException {
-        ObjectId contentId = null;
-        contentId = ConvertImage(file);
+        ObjectId contentId = ConvertImage(file);
         PostContent postContent= new PostContent(contentId,GetSize(file),GenerateMetadata(file));
         return postContent;
     }

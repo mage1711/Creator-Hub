@@ -1,7 +1,8 @@
 package Controllers;
 
-import Models.*;
-import com.google.gson.Gson;
+import Models.Post;
+import Models.User;
+import Models.ViewerState;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -34,19 +35,19 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
 //        db.DatabaseConnection();
 //
 //        User user = new User("name","country","email");
-//        ImagePost post = new ImagePost(ImageConverter.GetImage());
+//        ImagePost post = new ImagePost(ImageConverter.GetVideo());
 //        db.insertObject("Posts",post);
 //        post.setLikes(new ArrayList<User>());
 //        post.likePost(user);
 //        post.unlikePost(user);
 //        db.updateObject("Posts",post,"post.id",post.getId());
-//       ImagePost post2 = new ImagePost(ImageConverter.GetImage());
+//       ImagePost post2 = new ImagePost(ImageConverter.GetVideo());
 //        db.insertObject("Posts",post2);
 //        post2.setLikes(new ArrayList<User>());
 //        post2.likePost(new User("name","country","email"));
 //        post2.setSubscriberOnly(true);
 //        db.updateObject("Posts",post2,"post.id",post.getId());
-//        System.out.println(post.GetImage().getName());
+//        System.out.println(post.GetVideo().getName());
 //        System.out.println(post.getId());
     }
 
