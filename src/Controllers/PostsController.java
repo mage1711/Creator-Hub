@@ -16,9 +16,9 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
         Database db = Database.getCurrentDatabase();
         ArrayList<Post> posts = new ArrayList<>();
         if (user.getClass() == User.class) {
-            ArrayList<Object> postsDocs = db.getAllDocuments("Posts", Post.class);
+            ArrayList<Object> postsDocs = db.getAllDocuments("Posts", ImagePost.class);
             for (Object postDoc : postsDocs) {
-                posts.add((Post) postDoc);
+                posts.add((ImagePost) postDoc);
             }
             System.out.println(posts.get(0).getId());
             return posts;
@@ -39,7 +39,7 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
 
         return null;
     }
-
+    @Override
     public void CreatePost(User user,Post post){
         if (user.getClass() == Creator.class){
             Database db = Database.getCurrentDatabase();
@@ -60,11 +60,12 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
 
     }
 
-//    @Override
-//    public ArrayList<Object> generateFeed(User user) {
-//
-//        return null;
-//    }
-
+    @Override
+    public Post GetPost(User user) throws RemoteException {
+        Database db = Database.getCurrentDatabase();
+//        ArrayList<Post> posts = getPosts(user);
+        ArrayList<Object> posts = db.getAllDocuments("Posts",Post.class);
+        return (Post) posts.get(0);
+    }
 
 }

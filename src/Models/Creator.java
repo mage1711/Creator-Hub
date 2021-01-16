@@ -1,12 +1,11 @@
 package Models;
 
-import Controllers.Database;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Creator extends User implements Observer, Serializable {
+public class Creator extends User implements Serializable {
     private double moneyEarned;
     private ArrayList<User> followersList;
     private ArrayList<Post> posts;
@@ -97,16 +96,6 @@ public class Creator extends User implements Observer, Serializable {
         this.chats = chats;
     }
 
-    public void addPost(Post post) {
-        Database database = Database.getCurrentDatabase();
-        database.insertObject("Posts", post);
-    }
-
-    public void deletePost(Post post) {
-        Database database = Database.getCurrentDatabase();
-        database.deleteObject("Posts", post, "id", post.getId());
-    }
-
     public int getLikesCount() {
         // TODO: Update later
         return 0;
@@ -127,19 +116,7 @@ public class Creator extends User implements Observer, Serializable {
             System.out.println("Invalid value entered");
         }
     }
+// TODO: Add Update
 
-    public void addChat(Chat chat) {
-        this.chats.add(chat);
-        Database database = Database.getCurrentDatabase();
-        database.updateObject("Users", this, "id", this.getId());
-    }
-
-    @Override
-    public void update() {
-        Database database = Database.getCurrentDatabase();
-        Creator updatedObject = (Creator) database.getDocument("Users", "id", this.getId(), Creator.class);
-        this.chats = updatedObject.chats;
-        System.out.println( "you have a new message");
-    }
 
 }

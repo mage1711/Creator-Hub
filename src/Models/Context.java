@@ -4,8 +4,9 @@ import org.bson.types.ObjectId;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Context {
+public class Context implements Serializable {
     private FileConverter converter;
 
     public Context() {

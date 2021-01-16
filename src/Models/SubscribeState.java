@@ -35,8 +35,7 @@ public class SubscribeState extends ViewerState {
     public void startChat(Creator creator) {
         Chat chat = new Chat(creator, this, new ArrayList<>(), new ArrayList<>());
         this.chats.add(chat);
-        creator.addChat(chat);
-
+//        creator.addChat(chat);
         Database database = Database.getCurrentDatabase();
         database.updateObject("Users", this, "id", this.getId());
     }
