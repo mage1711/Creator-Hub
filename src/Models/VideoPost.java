@@ -1,6 +1,8 @@
 package Models;
 
-public class VideoPost extends PostDecorator {
+import java.io.Serializable;
+
+public class VideoPost extends Post implements Serializable {
     private Object content;
     private Object context;
     private Post post;
@@ -41,8 +43,5 @@ public class VideoPost extends PostDecorator {
         return this.post;
     }
 
-    @Override
-    public Post getPost() {
-        return this;
-    }
+
 }

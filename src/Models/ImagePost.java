@@ -2,9 +2,10 @@ package Models;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 
-public class ImagePost extends Post {
+public class ImagePost extends Post implements Serializable {
     private PostContent content;
     private Context context;
 
