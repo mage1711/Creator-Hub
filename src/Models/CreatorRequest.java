@@ -1,6 +1,8 @@
 package Models;
 
-public class CreatorRequest {
+import java.io.Serializable;
+
+public class CreatorRequest implements Serializable {
     private String id;
     private User user;
     private boolean accepted;

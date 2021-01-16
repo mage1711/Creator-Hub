@@ -2,10 +2,11 @@ package Models;
 
 import Controllers.Database;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Creator extends User implements Observer {
+public class Creator extends User implements Observer, Serializable {
     private double moneyEarned;
     private ArrayList<User> followersList;
     private ArrayList<Post> posts;

@@ -1,8 +1,9 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Chat implements Subject {
+public class Chat implements Subject, Serializable {
     private Creator creator;
     private User subscriber;
     private ArrayList<ChatMessage> messages;
