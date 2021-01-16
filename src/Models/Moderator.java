@@ -45,16 +45,6 @@ public class Moderator {
         database.updateObject("Users", creator, "id", creator.getId());
     }
 
-    public ArrayList<Report> getReports() {
-        Database database = Database.getCurrentDatabase();
-        ArrayList<Report> reports = new ArrayList<>();
-        ArrayList<Object> reportsDocs = database.getAllDocuments("Reports", Report.class);
-        for (Object reportsDoc : reportsDocs) {
-            reports.add((Report) reportsDoc);
-        }
-        return reports;
-    }
-
     public void deletePost(Post post) {
         Database database = Database.getCurrentDatabase();
         database.deleteObject("Posts", post, "id", post.getId());
@@ -70,15 +60,5 @@ public class Moderator {
         user.addWarning(warningText);
         Database database = Database.getCurrentDatabase();
         database.updateObject("Users", user, "id", user.getId());
-    }
-
-    public ArrayList<CreatorRequest> getCreatorRequests() {
-        Database database = Database.getCurrentDatabase();
-        ArrayList<CreatorRequest> requests = new ArrayList<>();
-        ArrayList<Object> requestsDocs = database.getAllDocuments("CreatorRequests", Report.class);
-        for (Object requestDoc : requestsDocs) {
-            requests.add((CreatorRequest) requestDoc);
-        }
-        return requests;
     }
 }
