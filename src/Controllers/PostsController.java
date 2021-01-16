@@ -40,7 +40,7 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
         return null;
     }
     @Override
-    public void CreatePost(User user,Post post){
+    public void CreatePost(Creator user,Post post){
         if (user.getClass() == Creator.class){
             Database db = Database.getCurrentDatabase();
             if (ImagePost.class.equals(post.getClass())) {

@@ -16,17 +16,14 @@ public class CreatorHub {
         IPostsController postsController = new PostsController();
         IModerator moderatorController = new ModeratorController();
         IUserController userController = new UserController();
+        IChatController chatController = new ChatController();
 
         Registry registry = LocateRegistry.createRegistry(1099);
         registry.bind("authorizationController", authorizationController);
         registry.bind("postsController", postsController);
         registry.bind("moderatorController", moderatorController);
         registry.bind("userController", userController);
+        registry.bind("chatController", chatController);
         System.out.println("ready!");
-        Chat chat = new Chat(new Creator(),new SubscribeState(),new ArrayList<>(),new ArrayList<>());
-        ChatMessage message = new ChatMessage("Hello",new Date(),chat.getSubscriber().getId(),chat.getCreator().getId());
-        ChatController chatController = new ChatController();
-        chatController.createChat(chat);
-        chatController.sendMessage(chat,message);
     }
 }
