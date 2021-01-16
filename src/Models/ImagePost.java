@@ -2,6 +2,7 @@ package Models;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 public class ImagePost extends Post {
     private PostContent content;
@@ -11,8 +12,12 @@ public class ImagePost extends Post {
         super();
     }
 
-    public ImagePost(File file) throws IOException {
-        super();
+    public ImagePost( Date date, String text, boolean subscriberOnly, Creator poster, String type) {
+        super(date,  text,  subscriberOnly, poster, type);
+    }
+
+    public ImagePost( Date date, String text, boolean subscriberOnly, Creator poster, String type,File file) throws IOException {
+        super(date,  text,  subscriberOnly, poster, type);
         context = new Context(new ImageConverter());
         this.content = context.convertFile(file);
     }

@@ -22,18 +22,18 @@ public class Post implements Serializable {
         this.id = generatedString;
     }
 
-    public Post( ArrayList<User> likes, Date date, String text, boolean subscriberOnly, Creator poster, String type) {
+    public Post( Date date, String text, boolean subscriberOnly, Creator poster, String type) {
         byte[] array = new byte[7]; // length is bounded by 7
         new Random().nextBytes(array);
         String generatedString = new String(array, Charset.forName("UTF-8"));
         this.id = generatedString;
-        this.likes = likes;
         this.date = date;
         this.text = text;
         this.subscriberOnly = subscriberOnly;
         this.poster = poster;
         this.type = type;
     }
+
 
     public String getId() {
         return id;

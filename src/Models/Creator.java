@@ -44,7 +44,10 @@ public class Creator extends User implements Observer {
         this.bankAccount = bankAccount;
         this.chats = chats;
     }
+    public Creator(String name, String country, String email){
+        super(name, country, email);
 
+    }
     public double getMoneyEarned() {
         return moneyEarned;
     }

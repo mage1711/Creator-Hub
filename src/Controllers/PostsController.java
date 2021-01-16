@@ -1,13 +1,12 @@
 package Controllers;
 
-import Models.Post;
-import Models.User;
-import Models.ViewerState;
+import Models.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PostsController extends UnicastRemoteObject implements IPostsController {
     public PostsController() throws RemoteException {
@@ -29,27 +28,22 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
         return null;
     }
 
-    public static void main(String[] args) throws IOException {
-//        Database db = Database.getCurrentDatabase();
-//        Gson gson = new Gson();
-//        db.DatabaseConnection();
-//
-//        User user = new User("name","country","email");
-//        ImagePost post = new ImagePost(ImageConverter.GetVideo());
-//        db.insertObject("Posts",post);
-//        post.setLikes(new ArrayList<User>());
-//        post.likePost(user);
-//        post.unlikePost(user);
-//        db.updateObject("Posts",post,"post.id",post.getId());
-//       ImagePost post2 = new ImagePost(ImageConverter.GetVideo());
-//        db.insertObject("Posts",post2);
-//        post2.setLikes(new ArrayList<User>());
-//        post2.likePost(new User("name","country","email"));
-//        post2.setSubscriberOnly(true);
-//        db.updateObject("Posts",post2,"post.id",post.getId());
-//        System.out.println(post.GetVideo().getName());
-//        System.out.println(post.getId());
+    @Override
+    public ArrayList<Object> generateFeed(User user) {
+
+        return null;
     }
 
+    public static void main(String[] args) throws IOException {
+        Database db = Database.getCurrentDatabase();
+        Creator user = new Creator("test","egypt","test@test.com");
+        ImagePost post= new ImagePost(new Date(),"test",false,user,"normal",ImageConverter.GetImage());
+        db.insertObject("Posts",post);
+       System.out.println(db.getDocument("Posts","text",post.getText(),Post.class));
+       Post result = (Post) db.getDocument("Posts","text",post.getText(),Post.class);
+       System.out.println(result.getType());
+//         ImagePost result2 = (ImagePost) db.getDocument("Posts","text",post.getText(),ImagePost.class);
+//         System.out.println(result.getType());
 
+    }
 }
