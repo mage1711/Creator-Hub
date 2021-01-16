@@ -15,9 +15,9 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
     @Override
     public ArrayList<Post> getPosts(User user) {
         // TODO: Update to get each user feed
-        if (user.getClass() == ViewerState.class || user.getClass() == User.class) {
-            Database database = Database.getCurrentDatabase();
-            ArrayList<Post> posts = new ArrayList<>();
+        Database database = Database.getCurrentDatabase();
+        ArrayList<Post> posts = new ArrayList<>();
+        if (user.getClass() == User.class) {
             ArrayList<Object> postsDocs = database.getAllDocuments("Posts", Post.class);
             for (Object postDoc : postsDocs) {
                 posts.add((Post) postDoc);
@@ -25,14 +25,28 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
             System.out.println(posts.get(0).getId());
             return posts;
         }
+        else if(user.getClass() == ViewerState.class){
+            ArrayList<Creator> subscribed = ((ViewerState) user).getSubscribed();
+            for (Creator creator :subscribed) {
+                ArrayList<Object> postsDocs = database.getAllDocuments("Posts", ImagePost.class, "poster.id", creator.getId());
+                for (Object postDoc : postsDocs) {
+                    posts.add((ImagePost) postDoc);
+                }
+            }
+            System.out.println(posts.get(0).getId());
+            return posts;
+        }
+
+
+
         return null;
     }
 
-    @Override
-    public ArrayList<Object> generateFeed(User user) {
-
-        return null;
-    }
+//    @Override
+//    public ArrayList<Object> generateFeed(User user) {
+//
+//        return null;
+//    }
 
     public static void main(String[] args) throws IOException {
         Database db = Database.getCurrentDatabase();
@@ -41,10 +55,13 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
         post.setContext(new Context());
         db.insertObject("Posts",post);
       System.out.println(db.getDocument("Posts","text",post.getText(),ImagePost.class));
-        ImagePost result = (ImagePost) db.getDocument("Posts","text",post.getText(),ImagePost.class);
+        ImagePost result = (ImagePost) db.getDocument("Posts","poster.id",user.getId(),ImagePost.class);
+        result.setContext(new Context(new ImageConverter()));
        System.out.println(result.getType());
+//        ArrayList<Object> postsDocs = db.getAllDocuments("Posts", Post.class,"poster.id");
 //         ImagePost result2 = (ImagePost) db.getDocument("Posts","text",post.getText(),ImagePost.class);
 //         System.out.println(result.getType());
+
 
     }
 }

@@ -9,5 +9,5 @@ import java.util.ArrayList;
 
 public interface IPostsController extends Remote {
     ArrayList<Post> getPosts(User user) throws RemoteException;
-    ArrayList<Object> generateFeed(User user);
+//    ArrayList<Object> generateFeed(User user);
 }
