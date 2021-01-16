@@ -37,10 +37,11 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
     public static void main(String[] args) throws IOException {
         Database db = Database.getCurrentDatabase();
         Creator user = new Creator("test","egypt","test@test.com");
-        ImagePost post= new ImagePost(new Date(),"test",false,user,"normal",ImageConverter.GetImage());
+        ImagePost post= new ImagePost(new Date(),"test",false,user,"normal");
+        post.setContext(new Context());
         db.insertObject("Posts",post);
-       System.out.println(db.getDocument("Posts","text",post.getText(),Post.class));
-       Post result = (Post) db.getDocument("Posts","text",post.getText(),Post.class);
+      System.out.println(db.getDocument("Posts","text",post.getText(),ImagePost.class));
+        ImagePost result = (ImagePost) db.getDocument("Posts","text",post.getText(),ImagePost.class);
        System.out.println(result.getType());
 //         ImagePost result2 = (ImagePost) db.getDocument("Posts","text",post.getText(),ImagePost.class);
 //         System.out.println(result.getType());

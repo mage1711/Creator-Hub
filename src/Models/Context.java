@@ -8,8 +8,11 @@ import java.io.IOException;
 public class Context {
     private FileConverter converter;
 
+    public Context() {
+    }
 
     public Context(FileConverter converter) {
+        if(converter != null)
         this.converter = converter;
     }
 
