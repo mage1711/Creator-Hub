@@ -1,18 +1,27 @@
 package Models;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Chat implements Subject, Serializable {
+
+
+    private String id;
     private Creator creator;
-    private User subscriber;
+    private SubscribeState subscriber;
     private ArrayList<ChatMessage> messages;
     private ArrayList<Observer> observers;
 
     public Chat() {
     }
 
-    public Chat(Creator creator, User subscriber, ArrayList<ChatMessage> messages, ArrayList<Observer> observers) {
+    public Chat(Creator creator, SubscribeState subscriber, ArrayList<ChatMessage> messages, ArrayList<Observer> observers) {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        this.id = generatedString;
         this.creator = creator;
         this.subscriber = subscriber;
         this.messages = messages;
@@ -27,11 +36,11 @@ public class Chat implements Subject, Serializable {
         this.creator = creator;
     }
 
-    public User getSubscriber() {
+    public SubscribeState getSubscriber() {
         return subscriber;
     }
 
-    public void setSubscriber(User subscriber) {
+    public void setSubscriber(SubscribeState subscriber) {
         this.subscriber = subscriber;
     }
 
@@ -51,9 +60,19 @@ public class Chat implements Subject, Serializable {
         this.observers = observers;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void addMessage(ChatMessage message) {
         messages.add(message);
-        notifyObservers();
+        if(message.getReceiverID() == creator.getId())
+        notifyObservers("Creator");
+        else notifyObservers("Subscriber");
     }
 
     @Override
@@ -67,9 +86,9 @@ public class Chat implements Subject, Serializable {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(String type) {
         for (Observer observer : observers) {
-            observer.update();
+            observer.update(type);
         }
     }
 }

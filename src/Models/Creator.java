@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Creator extends User implements Serializable {
+public class Creator extends User implements Serializable,Observer {
     private double moneyEarned;
     private ArrayList<User> followersList;
     private ArrayList<Post> posts;
@@ -14,6 +14,7 @@ public class Creator extends User implements Serializable {
     private ArrayList<Chat> chats;
 
     public Creator() {
+        super();
     }
 
     public Creator(double moneyEarned, ArrayList<User> followersList, ArrayList<Post> posts, double subscriptionPrice, String bankAccount, ArrayList<Chat> chats) {
@@ -115,6 +116,12 @@ public class Creator extends User implements Serializable {
             // TODO: Add error handling instead
             System.out.println("Invalid value entered");
         }
+    }
+
+    @Override
+    public void update(String type) {
+        if(type == "Creator")
+            System.out.println("A new message is sent from Subscriber");
     }
 // TODO: Add Update
 

@@ -8,7 +8,9 @@ public class ViewerState extends User {
     protected ArrayList<Creator> followedCreators;
     protected ArrayList<Creator> subscribed;
 
+
     public ViewerState() {
+        super();
         followedCreators = new ArrayList<>();
         subscribed = new ArrayList<>();
     }
