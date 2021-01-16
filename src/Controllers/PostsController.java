@@ -15,10 +15,10 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
     @Override
     public ArrayList<Post> getPosts(User user) {
         // TODO: Update to get each user feed
-        Database database = Database.getCurrentDatabase();
+        Database db = Database.getCurrentDatabase();
         ArrayList<Post> posts = new ArrayList<>();
         if (user.getClass() == User.class) {
-            ArrayList<Object> postsDocs = database.getAllDocuments("Posts", Post.class);
+            ArrayList<Object> postsDocs = db.getAllDocuments("Posts", Post.class);
             for (Object postDoc : postsDocs) {
                 posts.add((Post) postDoc);
             }
@@ -28,7 +28,7 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
         else if(user.getClass() == ViewerState.class){
             ArrayList<Creator> subscribed = ((ViewerState) user).getSubscribed();
             for (Creator creator :subscribed) {
-                ArrayList<Object> postsDocs = database.getAllDocuments("Posts", ImagePost.class, "poster.id", creator.getId());
+                ArrayList<Object> postsDocs = db.getAllDocuments("Posts", ImagePost.class, "poster.id", creator.getId());
                 for (Object postDoc : postsDocs) {
                     posts.add((ImagePost) postDoc);
                 }
@@ -40,6 +40,26 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
 
 
         return null;
+    }
+
+    public void CreatePost(User user,Post post){
+        if (user.getClass() == Creator.class){
+            Database db = Database.getCurrentDatabase();
+            if (ImagePost.class.equals(post.getClass())) {
+                ImagePost imagePost = (ImagePost) post;
+                imagePost.setContext(new Context());
+                db.insertObject("Posts", imagePost);
+            } else if (VideoPost.class.equals(post.getClass())) {
+                VideoPost videoPost = (VideoPost) post;
+                videoPost.setContext(new Context());
+                db.insertObject("Posts", videoPost);
+            }
+            else {
+                db.insertObject("Posts", post);
+            }
+
+        }
+
     }
 
 //    @Override
