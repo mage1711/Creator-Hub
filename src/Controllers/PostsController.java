@@ -2,11 +2,9 @@ package Controllers;
 
 import Models.*;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PostsController extends UnicastRemoteObject implements IPostsController {
     public PostsController() throws RemoteException {
@@ -68,20 +66,5 @@ public class PostsController extends UnicastRemoteObject implements IPostsContro
 //        return null;
 //    }
 
-    public static void main(String[] args) throws IOException {
-        Database db = Database.getCurrentDatabase();
-        Creator user = new Creator("test","egypt","test@test.com");
-        ImagePost post= new ImagePost(new Date(),"test",false,user,"normal");
-        post.setContext(new Context());
-        db.insertObject("Posts",post);
-      System.out.println(db.getDocument("Posts","text",post.getText(),ImagePost.class));
-        ImagePost result = (ImagePost) db.getDocument("Posts","poster.id",user.getId(),ImagePost.class);
-        result.setContext(new Context(new ImageConverter()));
-       System.out.println(result.getType());
-//        ArrayList<Object> postsDocs = db.getAllDocuments("Posts", Post.class,"poster.id");
-//         ImagePost result2 = (ImagePost) db.getDocument("Posts","text",post.getText(),ImagePost.class);
-//         System.out.println(result.getType());
 
-
-    }
 }
