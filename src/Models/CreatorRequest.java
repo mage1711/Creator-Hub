@@ -1,6 +1,8 @@
 package Models;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.util.Random;
 
 public class CreatorRequest implements Serializable {
     private String id;
@@ -8,6 +10,10 @@ public class CreatorRequest implements Serializable {
     private boolean accepted;
 
     public CreatorRequest(User user) {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+        this.id = generatedString;
         this.user = user;
     }
 

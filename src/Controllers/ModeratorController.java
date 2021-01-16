@@ -52,7 +52,7 @@ public class ModeratorController extends UnicastRemoteObject implements IModerat
     public ArrayList<CreatorRequest> getCreatorRequests() {
         Database database = Database.getCurrentDatabase();
         ArrayList<CreatorRequest> requests = new ArrayList<>();
-        ArrayList<Object> requestsDocs = database.getAllDocuments("CreatorRequests", Report.class);
+        ArrayList<Object> requestsDocs = database.getAllDocuments("CreatorRequests", CreatorRequest.class);
         for (Object requestDoc : requestsDocs) {
             requests.add((CreatorRequest) requestDoc);
         }

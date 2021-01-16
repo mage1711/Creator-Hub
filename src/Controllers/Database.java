@@ -33,7 +33,7 @@ public class Database {
     }
 
     public void DatabaseConnection() {
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
+//        Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
         try {
             String connectionString = "mongodb+srv://admin:90ZVui6wnRLIL2e9@Cluster1.kocpj.mongodb.net/<dbname>?retryWrites=true&w=majority";
             this.client = new MongoClient(new MongoClientURI(connectionString));

@@ -12,11 +12,13 @@ public class CreatorHub {
         IAuthorization authorizationController = new AuthorizationController();
         IPostsController postsController = new PostsController();
         IModerator moderatorController = new ModeratorController();
+        IUserController userController = new UserController();
 
         Registry registry = LocateRegistry.createRegistry(1099);
         registry.bind("authorizationController", authorizationController);
         registry.bind("postsController", postsController);
         registry.bind("moderatorController", moderatorController);
+        registry.bind("userController", userController);
         System.out.println("ready!");
     }
 }
