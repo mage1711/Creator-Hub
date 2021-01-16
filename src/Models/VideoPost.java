@@ -5,6 +5,7 @@ public class VideoPost extends PostDecorator {
     private Object context;
     private Post post;
     public VideoPost() {
+        super();
     }
 
     public VideoPost(Post post, Object context) {
